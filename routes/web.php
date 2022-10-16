@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// ‘/’でhttps://localhost:8000/へサクセス
+
+// return viewでviewsフォルダのテンプレートを使用してる
 Route::get('/', function () {
     return view('welcome');
 });
