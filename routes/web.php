@@ -20,8 +20,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// サンプルルーティング
-$html = <<<EOF
+// ブラウザのけつに/testとすると変数の中身がtestになってpでtestが出る仕組み
+// getの{}の中に空白があると動かなくなる
+// これは必須パラメータというやつ
+// 第1引数に値がないとエラーになる /の後に何も入れなかったら
+
+// 任意パラメーターにすれば値がなくてもアクセスできる
+// Route::get( 'hello/{msg?}', function ( $msg = "no,message" )
+// このようにすればok
+
+Route::get( 'hello/{msg}', function ( $msg ) {
+    // サンプルルーティング
+    $html = <<<EOF
     <html>
         <head>
             <title>Hello</title>
@@ -32,11 +42,10 @@ $html = <<<EOF
         </head>
         <body>
             <h1>Hello</h1>
+            <p>{$msg}</p>
             <p>サンプルページ</p>
         </body>
     </html>
-EOF;
-
-Route::get( 'hello', function () use ( $html ) {
+    EOF;
     return $html;
 } );
